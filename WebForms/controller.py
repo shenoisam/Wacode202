@@ -9,12 +9,12 @@ class Controller:
         self.db = DB_Connection()
         self.g = Geolocation()
 
+
     def validate_user(self, username, password):
-        print("HI")
         rmStr = "username = %s AND password = %s"
         params = (username, password)
         print(rmStr)
-        res = self.db.query("ID", "user", rmStr, params)
+        res = "123456789"#self.db.query("ID", "user", rmStr, params)
         return res
 
     def Geolocate(self, image):
@@ -22,9 +22,7 @@ class Controller:
         return self.g.run_program(image)
 
     def store_user(self, name, username, password):
-        print("HI")
         r = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(0,20)])
         print(name, username, password, r)
         self.db.insert("INSERT INTO user (name, username, password, ID)  VALUES (\'%s\', \'%s\', \'%s\',\'%s\')" % (name, username, password,r))
-
 

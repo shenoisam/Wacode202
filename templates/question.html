@@ -1,0 +1,61 @@
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% block content %}
+
+
+
+<div class="question">
+<div class="question-screen">
+<div class="question-title">
+
+     <form action="/takeSurvey" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <p class="question1-field">
+            {{ form.question1.label }}<br>
+            {{ form.question1(size=32) }}
+        </p>
+        <p class="question2-field">
+            {{ form.question2.label }}<br>
+            {{ form.question2(size=32) }}
+        </p>
+         <p class="question3-field">
+            {{ form.question3.label }}<br>
+            {{ form.question3(size=32) }}
+        </p>
+         <p class="question4-field">
+            {{ form.question4.label }}<br>
+            {{ form.question4(size=32) }}
+        </p>
+         <p class="question5-field">
+            {{ form.question5.label }}<br>
+            {{ form.question5(size=32) }}
+        </p>
+         <p class="question6-field">
+            {{ form.question6.label }}<br>
+            {{ form.question6(size=32) }}
+        </p>
+         <p class="question7-field">
+            {{ form.question7.label }}<br>
+            {{ form.question7(size=32) }}
+        </p>
+         <p class="question8-field">
+            {{ form.question8.label }}<br>
+            {{ form.question8(size=32) }}
+        </p>
+         <p class="question9-field">
+            {{ form.question9.label }}<br>
+            {{ form.question9(size=32) }}
+        </p>
+         <p class="question10-field">
+            {{ form.question9.label }}<br>
+            {{ form.question9(size=32) }}
+        </p>
+
+        <button  class="btn btn-primary btn-large btn-block">{{ form.submit() }}</button>
+    </form>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

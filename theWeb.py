@@ -7,7 +7,8 @@ from flask_bootstrap import Bootstrap
 from WebForms.User import LoginForm
 from secrets import SECRET_KEY
 from WebForms.controller import Controller
-
+from flask_nav.elements import Navbar, View
+from flask_nav import Navigation
 
 # Create the flask app
 
@@ -17,12 +18,25 @@ app.config['SECRET_KEY'] = SECRET_KEY
 bootstrap = Bootstrap(app)
 c = Controller()
 
+nav = Navigation()
+
+
+@nav.navigation()
+def mynavbar():
+    return Navbar(
+        'mysite',
+        View('Home', 'index'),
+    )
+
+
+nav.init_app(app)
+
 
 @app.route('/')
 def hello_world():
     error = None
     form = LoginForm()
-    user = session.get('user',None)
+    user = session.get('user', None)
     if user is not None:
         return render_template('index.html', error=error)
     else:
@@ -45,6 +59,4 @@ def login():
             # Redirect back to the home page
             return redirect('/')
     # Otherwise if this is a Get request or the validation failed, render the login template
-    return render_template('login.html', error=error,form=form)
-
-
+    return render_template('login.html', error=error, form=form)

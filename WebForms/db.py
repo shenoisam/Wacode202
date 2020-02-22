@@ -26,11 +26,12 @@ class DB_Connection:
             else:
                 print(err)
 
-    def insert(self,query,data):
+    def insert(self, query, data):
         self.cursor.execute(query, data)
 
     def query(self, select, table, rmStr):
-        query = ("SELECT %s FROM %s WHERE %s", select, table, rmStr)
+        query = "SELECT %s FROM %s WHERE %s" % (select, table, rmStr)
+        print(query)
         return self.cursor.execute(query)
 
     def close(self):

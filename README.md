@@ -7,4 +7,5 @@ Run the following commands
 `export FLASK_APP=theWeb.py` 
 `flask run` 
 
-
+You need to have a secrets.py file with the following paramters: 
+DB_HOST, DB_PASSWORD, DB_USER, DATABASE, SECRET_KEY 

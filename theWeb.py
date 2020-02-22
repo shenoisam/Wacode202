@@ -6,11 +6,14 @@ from flask import render_template, redirect, url_for, flash, session
 from flask_bootstrap import Bootstrap
 from WebForms.User import LoginForm
 from secrets import SECRET_KEY
-from WebForms.controller import *
+from WebForms.controller import Controller
+
 
 # Create the flask app
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
+
 bootstrap = Bootstrap(app)
 c = Controller()
 
@@ -18,7 +21,9 @@ c = Controller()
 @app.route('/')
 def hello_world():
     error = None
-    if session['user'] is not None:
+    form = LoginForm()
+    user = session.get('user',None)
+    if user is not None:
         return render_template('index.html', error=error)
     else:
         return render_template('login.html', error=error, form=form)

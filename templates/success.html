@@ -1,0 +1,11 @@
+<!-- This file is the success scenario. This means that there was a > 70% chance that you should drive-->
+{% block title %}Wacode 2020{% endblock %}
+
+{% block navbar %}
+{{nav.mynavbar.render()}}
+{% endblock %}
+
+{% block content %}
+  <h1>Your ARE safe to drive! </h1>
+  <p>Your precentage was : {{ value }}</p>
+{% endblock %}

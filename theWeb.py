@@ -1,39 +1,31 @@
-#!/usr/bin/env python
-
-# Import statements
 from flask import Flask
-from flask import render_template, redirect, url_for, flash, session
+from flask import render_template, redirect, url_for, flash, session, Blueprint
+from flask_nav import Nav
+from flask_nav.elements import Navbar, Subgroup, View, Link, Text, Separator
 from flask_bootstrap import Bootstrap
 from WebForms.User import LoginForm, RegisterForm
 from secrets import SECRET_KEY
 from WebForms.controller import Controller
-from flask_nav.elements import Navbar, View
-# from flask_nav import Navigation
 
 # Create the flask app
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = SECRET_KEY
 
-bootstrap = Bootstrap(app)
+Bootstrap(app)
 c = Controller()
 
-# nav = Navigation()
 
+@app.route('/test')
+def index2():
+    return render_template('index.html')
 
-# @nav.navigation()
-# def mynavbar():
-#     return Navbar(
-#         'mysite',
-#         View('Home', 'index'),
-#     )
-
-
-# nav.init_app(app)
-
+@app.route('/items/<item>')
+def item(item):
+    return '<h1>THE ITEM PAGE!!! THE ITEM IS: {}.'.format(item)
 
 @app.route('/')
-def hello_world():
+def index():
     error = None
     form = LoginForm()
     user = session.get('user', None)
@@ -62,6 +54,22 @@ def login():
     return render_template('login.html', error=error, form=form)
 
 
+# This route logs in the user to the software system
+@app.route('/takeSurvey', methods=['GET', 'POST'])
+def survey():
+    error = None
+    # Create an instance of the log in form
+    form = TakeSurveyForm()
+    # If the form is submittable, submit it
+    user = session.get('user', None)
+    if user is not None:
+        if s is not None:
+            session["user"] = s
+            # Redirect back to the home page
+            return redirect('/')
+    return redirect('/')
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     error = None
@@ -73,3 +81,5 @@ def register():
         return redirect('/login')
     # If it didn't work, redirect to the registration page
     return render_template('register.html', error=error, form=form)
+
+app.run(debug=True)

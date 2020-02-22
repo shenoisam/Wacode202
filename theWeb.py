@@ -59,7 +59,11 @@ def login():
 def survey():
     error = None
     # Create an instance of the log in form
+    myquestions = {}
+    myquestions["Are you drunk?"] = ["Yes", "No", "Maybe", "Apply Hadamard to find out"]
     form = SurveyForm()
+    form.create_fields(myquestions)
+
     # If the form is submittable, submit it
     user = session.get('user', None)
     if user is not None:

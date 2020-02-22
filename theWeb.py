@@ -57,6 +57,7 @@ def survey():
     error = None
     # Create an instance of the log in form
     form = SurveyForm()
+
     # If the form is submittable, submit it
     user = session.get('user', None)
     if user is not None:

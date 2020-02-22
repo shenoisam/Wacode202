@@ -1,22 +1,29 @@
-{% extends "bootstrap/base.html" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 {% block content %}
-    <h1>Register</h1>
+
     <form action="/register" method="post" novalidate>
+        <div class="login">
+<div class="login-screen">
+<div class="app-title">
+        <h1>Register</h1>
         {{ form.hidden_tag() }}
-        <p>
+        <p class="login-field">
             {{ form.name.label }}<br>
             {{ form.name(size=32) }}
         </p>
-        <p>
+        <p class="login-field">
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}
         </p>
-        <p>
+        <p class="login-field">
             {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </p>
-        <p>
+        <p class="login-field">
             {{ form.submit() }}
         </p>
     </form>
+</div>
+</div>
+</div>
 {% endblock %}

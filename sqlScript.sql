@@ -1,6 +1,6 @@
 -- Sql Script for Wacode2020
-
-Use Wacode2020
+CREATE SCHEMA Wacode2020;
+Use Wacode2020;
 
 -- Create a user table
 CREATE TABLE user(

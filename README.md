@@ -4,7 +4,10 @@ Please ensure that you have python3 and mysql installed to run this program.
 
 Run the following commands 
 
-`export FLASK_APP=theWeb.py` 
-`flask run` 
+```
+# This exports the environment variable Flask needs
+export FLASK_APP=theWeb.py` 
+flask run
+``` 
 
 

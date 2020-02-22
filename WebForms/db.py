@@ -18,7 +18,7 @@ class DB_Connection:
                                                auth_plugin='mysql_native_password')
             self.cursor = self.cnx.cursor()
         except mysql.connector.Error as err:
-
+            print(err)
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
                 print("Something is wrong with your user name or password")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
@@ -26,8 +26,8 @@ class DB_Connection:
             else:
                 print(err)
 
-    def insert(self, query, data):
-        self.cursor.execute(query, data)
+    def insert(self, query):
+        self.cursor.execute(query)
 
     def query(self, select, table, rmStr):
         query = "SELECT %s FROM %s WHERE %s" % (select, table, rmStr)

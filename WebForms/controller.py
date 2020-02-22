@@ -14,4 +14,7 @@ class Controller:
         print(res)
         return res
 
+    def store_user(self, name, username, password):
+        self.db.insert("INSERT INTO user VALUES (%s, %s, %s)" % (name, username, password))
+
 

@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash, session, Blueprint
 from flask_nav import Nav
 from flask_nav.elements import Navbar, Subgroup, View, Link, Text, Separator
 from flask_bootstrap import Bootstrap
-from WebForms.User import LoginForm, RegisterForm, Geolocate
+from WebForms.User import LoginForm, RegisterForm, Geolocate, SurveyForm
 from secrets import SECRET_KEY
 from WebForms.controller import Controller
 from werkzeug.utils import secure_filename
@@ -56,16 +56,17 @@ def login():
 def survey():
     error = None
     # Create an instance of the log in form
-    form = SurveyForm()
-
+    myquestions = dict()
+    myquestions["Are you drunk?"] = ["Yes", "No", "Maybe", "Apply Hadamard to find out"]
+    form = SurveyForm( obj={"Are you drunk?"})
+    form.questions.choices = myquestions.keys()
     # If the form is submittable, submit it
     user = session.get('user', None)
     if user is not None:
-        if s is not None:
-            session["user"] = s
-            # Redirect back to the home page
-            return redirect('/')
-    return redirect('/')
+        if form.validate_on_submit():
+            redirect(render_template('success.html', error=error))
+        return render_template('question.html', error=error, form=form)
+    return redirect('/login')
 
 
 def allowed_file(filename):

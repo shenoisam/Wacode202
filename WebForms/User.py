@@ -1,7 +1,7 @@
 # This file defines all of the form classes for the user object in the database
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, FileField
 from wtforms.validators import DataRequired
 
 class LoginForm(FlaskForm):
@@ -23,3 +23,5 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('Register')
 
 
+class Geolocate(FlaskForm):
+    image = FileField(u'Image File', validators=[DataRequired()])

@@ -26,3 +26,14 @@ class Controller:
         print(name, username, password, r)
         self.db.insert("INSERT INTO user (name, username, password, ID)  VALUES (\'%s\', \'%s\', \'%s\',\'%s\')" % (name, username, password,r))
 
+    def calcuate_score(self,a,b,c):
+        score = ((int(a) + int(b) + int(c))/12) * 100
+        return score
+
+    def storeTrustedContact(self,Contact):
+        self.db.insert("INSERT INTO user (name, username, password, ID)  VALUES (\'%s\', \'%s\', \'%s\',\'%s\')" % ( name, username, password, r))
+
+    def getContacts(self,id):
+        params = {"ID": id}
+        res = self.db.query("Email", "TrustedContact", "ID = %s ", params)
+        return ["Samuel_Shenoi1@baylor.edu","potato@baylor.edu"]

@@ -1,0 +1,24 @@
+.login {
+margin: 20px auto;
+width: 40%;
+}
+.login-screen {
+background-color: #FFF;
+padding: 2%;
+border-radius: 5px
+}
+
+.app-title {
+text-align: center;
+color: #777;
+}
+
+.login-form {
+text-align: center;
+}
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+
+}

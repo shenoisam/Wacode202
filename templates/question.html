@@ -1,25 +1,73 @@
+{% block navbar %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+<link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/minifiedStyles.css') }}">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Drive Safe!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/takeSurvey">Take Survey</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/checkLocation">Check Location</a>
+      </li>
+
+       <li class="nav-item">
+        <a class="nav-link" href="/DrunkSpeech">Drunk Speech</a>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock %}
 {% block content %}
 
-
-
-<div class="question">
-<div class="question-screen">
-<div class="question-title">
-
+<div class="login">
+<div class="login-screen">
+<div class="app-title">
      <form action="/takeSurvey" method="post" novalidate>
         {{ form.hidden_tag() }}
-        <p class="question1-field">
-            {{ form.questions.label }}<br>
-            {{ form.questions() }}
+        <p class="login-field">
+           {{ form.question1.label }}<br>
+            {{ form.question1() }}
         </p>
+         <p class="login-field">
 
+            {{ form.question2.label }}<br>
+            {{ form.question2() }}
+        </p>
+         <p class="login-field">
+            {{ form.question3.label }}<br>
+            {{ form.question3() }}
+        </p>
         <button  class="btn btn-primary btn-large btn-block">{{ form.submit() }}</button>
     </form>
 </div>
 </div>
 </div>
+
+
 
 
 {% endblock %}

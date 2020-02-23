@@ -30,9 +30,21 @@ class Geolocate(FlaskForm):
 
 
 class Question(FlaskForm):
-    question = SelectField(u'Group', coerce=int)
+    question = SelectField('Are you drunk', choices=[("Yes", "Yes"),("No", "No"), ("POTATOES", "NO")])
+    submit = SubmitField('Submit')
 
 
 class SurveyForm(FlaskForm):
-    questions = FieldList(FormField(Question))
+    question1 = SelectField('What is the weather like?', choices=[("4","great!"),("0", "too drunk to tell"),("4", "snowing"), ("4", "rainy hard")], validators=[DataRequired()])
+    question2 = SelectField('How many drink did you have??',
+                            choices=[("0", "Can't even keep track"), ("1", "More than 3"), ("3", "1-2"),
+                                     ("4", "None")], validators=[DataRequired()])
+    question3 = SelectField('Count the number of bars |||||||||||||||||',
+                            choices=[("0", "There are bars?"), ("1", "15"), ("3", "16"),
+                                     ("4", "17")], validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+
+class AddTrustedContacts(FlaskForm):
+    TrustedContactEmail = StringField('TrustedContactEmail', validators=[DataRequired()])
     submit = SubmitField('Submit')

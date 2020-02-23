@@ -1,44 +1,72 @@
 <!-- This file is the success scenario. This means that there was a > 70% chance that you should drive-->
 {% block title %}Wacode 2020{% endblock %}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/css/ol.css">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+<link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/minifiedStyles.css') }}">
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">Drive Safe!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/takeSurvey">Take Survey</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/checkLocation">Check Location</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="/DrunkSpeech">Drunk Speech</a>
+      </li>
+
+    </ul>
+
+  </div>
+</nav>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% endblock%}
 {% block content %}
   <h1>Your ARE safe to drive! </h1>
-  <p>Your percentage was : {{ value }}</p>
-  <p>The coordinates of your location: {{ v }}</p>
-
-
+  {% if  v %}
+    <p>The coordinates of your location: {{ v }}</p>
     <h2>My Map</h2>
     <div id="map" class="map"></div>
     <script type="text/javascript">
-    var yourLocation = new Feature({
-      geometry: new Point(fromLonLat([{{lat}}, {{long}}]))
-    });
-    yourLocation.setStyle(new Style({
-      image: new Icon({
-        color: '#4271AE',
-        crossOrigin: 'anonymous',
-        src: '~/Desktop/Wacode2020/static/images/square.svg.png'
-      })
-    }));
-
-    var vectorSource = new VectorSource({
-         features: [yourLocation]
-     });
-      var map = new ol.Map({
+     var map = new ol.Map({
         target: 'map',
-        layers: [vectorSource,
+        layers: [
           new ol.layer.Tile({
             source: new ol.source.OSM()
           })
         ],
         view: new ol.View({
-          center: ol.proj.fromLonLat([31.54, 31.11]),
-          zoom: 0
+          center: ol.proj.fromLonLat([{{long}}, 8.82]),
+          zoom: 4
         })
       });
     </script>
+  {% else %}
+  <p>Your percentage was : {{ value }}</p>
+  {% endif %}
+
+
 
 {% endblock %}

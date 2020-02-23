@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, flash, session, Blueprint
 from flask_nav import Nav
 from flask_nav.elements import Navbar, Subgroup, View, Link, Text, Separator
 from flask_bootstrap import Bootstrap
-from WebForms.User import LoginForm, RegisterForm, Geolocate, SurveyForm
+from WebForms.User import LoginForm, RegisterForm, Geolocate, SurveyForm, Question, AddTrustedContacts
 from secrets import SECRET_KEY
 from WebForms.controller import Controller
 from werkzeug.utils import secure_filename
@@ -32,6 +32,15 @@ def index():
         return render_template('login.html', error=error, form=form)
 
 
+@app.route('/DrunkSpeech')
+def DrunkSpeech():
+    error = None
+    user = session.get('user', None)
+    if user is not None:
+        return render_template('DrunkSpeech.html', error=error, word="word")
+    else:
+        return render_template('login.html', error=error, form=form)
+
 # This route logs in the user to the software system
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -56,15 +65,18 @@ def login():
 def survey():
     error = None
     # Create an instance of the log in form
-    myquestions = dict()
-    myquestions["Are you drunk?"] = ["Yes", "No", "Maybe", "Apply Hadamard to find out"]
-    form = SurveyForm( obj={"Are you drunk?"})
-    form.questions.choices = myquestions.keys()
+    form = SurveyForm()
+
     # If the form is submittable, submit it
     user = session.get('user', None)
     if user is not None:
-        if form.validate_on_submit():
-            redirect(render_template('success.html', error=error))
+        print(request.method == "POST")
+        if request.method == "POST":
+            score = c.calcuate_score(form.question1.data, form.question2.data, form.question3.data)
+            if score > 60:
+                return render_template('success.html', error=error, value=score )
+            else:
+                return render_template('failure.html', error=error, value=score)
         return render_template('question.html', error=error, form=form)
     return redirect('/login')
 
@@ -84,6 +96,23 @@ def register():
         return redirect('/login')
     # If it didn't work, redirect to the registration page
     return render_template('register.html', error=error, form=form)
+
+
+@app.route('/trustedContacts', methods=['GET', 'POST'])
+def trustedContacts():
+    error = None
+    user = session.get('user', None)
+    data = c.getContacts(user)
+    if user is not None:
+        form = AddTrustedContacts()
+        if form.validate_on_submit():
+            redirect('/trustedContacts')
+        print(data)
+        return render_template('trustedContacts.html', error=error, form=form, emails=data)
+    else:
+        redirect('/login')
+
+
 
 
 @app.route('/checkLocation', methods=['GET', 'POST'])
@@ -106,7 +135,7 @@ def upload_file():
             fi = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(fi)
             res = c.Geolocate(fi)
-            print(res[0],res[1])
+            print('%.2f'%(res[1]))
             return render_template('success.html', error=error, v=res, long='%.2f'%(res[0]), lat='%.2f'%(res[1]))
     return render_template('upload_image.html', error=error, form=GeoForm)
 

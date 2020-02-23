@@ -1,3 +1,6 @@
+<!-- This file is the failure scenario. This means that there was a <70% chance that you should drive-->
+
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
 <link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
@@ -6,8 +9,9 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/minifiedStyles.css') }}">
+
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/minifiedStyles.css') }}">
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Drive Safe!</a>
@@ -18,7 +22,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/takeSurvey">Take Survey</a>
@@ -38,11 +42,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% endblock %}
-
 {% block content %}
-    <h1 style="width: 50%;">Upload new File</h1>
-    <form method=post enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
+  <h1 class="center">Drunk Speech Checker </h1>
+  <p class="center">Please Say the word {{word}}</p>
 {% endblock %}
